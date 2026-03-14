@@ -1,14 +1,22 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
+import { checkAndIncrementUsage } from '@/lib/ai-usage'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 export async function POST(request: Request) {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
   if (!user) return new Response('Unauthorized', { status: 401 })
+
+  // Check usage quota
+  const usage = await checkAndIncrementUsage(supabase, user.id, 'chat')
+  if (!usage.allowed) {
+    return Response.json(
+      { error: 'limit_reached', message: `You've used all ${usage.limit} free chat messages this month. Upgrade to Pro for unlimited access.`, remaining: 0 },
+      { status: 429 }
+    )
+  }
 
   const { message, conversationId } = await request.json()
 
@@ -125,6 +133,8 @@ INSTRUCTIONS:
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'X-Conversation-Id': savedConversationId ?? '',
+      'X-Usage-Remaining': String(usage.remaining),
+      'X-Usage-Limit': String(usage.limit),
     },
   })
 }

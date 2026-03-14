@@ -2,9 +2,21 @@
 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, OrbitControls, Sphere, Torus } from '@react-three/drei'
-import { useRef, Suspense } from 'react'
+import { useRef, Suspense, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import Link from 'next/link'
+
+function useIsMobile() {
+  const [mobile, setMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    setMobile(mq.matches)
+    const fn = (e: MediaQueryListEvent) => setMobile(e.matches)
+    mq.addEventListener('change', fn)
+    return () => mq.removeEventListener('change', fn)
+  }, [])
+  return mobile
+}
 
 function Coin({ position = [0, 0, 0] as [number, number, number] }) {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -64,21 +76,29 @@ function FloatingSphere({ position = [-3, -1, -1] as [number, number, number] })
 }
 
 export default function Hero() {
+  const mobile = useIsMobile()
+  const camZ = mobile ? 13 : 7
+  const coinScale = mobile ? 0.55 : 1
+  const ringScale = mobile ? 0.55 : 1
   return (
     <section className="relative h-screen overflow-hidden bg-gradient-to-b from-primary-dark via-primary-mid to-primary">
       <div className="absolute inset-0">
-        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 7], fov: 50 }}>
+        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, camZ], fov: 50 }}>
           <Suspense fallback={null}>
             <ambientLight intensity={0.4} />
             <directionalLight position={[10, 10, 5]} intensity={2.5} color="#ffffff" />
             <pointLight position={[-8, -8, -8]} color="#BDE8F5" intensity={1.5} />
             <pointLight position={[8, 4, 4]} color="#4988C4" intensity={1} />
 
-            <Coin position={[0, 0, 0]} />
-            <FloatingRing position={[3.5, 1.5, -1]} color="#BDE8F5" />
-            <FloatingRing position={[-3, -1.5, -0.5]} color="#4988C4" />
-            <FloatingSphere position={[-3.5, 1, -1]} />
-            <FloatingSphere position={[3, -1.5, -0.5]} />
+            <group scale={coinScale}>
+              <Coin position={[0, 0, 0]} />
+            </group>
+            <group scale={ringScale}>
+              <FloatingRing position={[3.5, 1.5, -1]} color="#BDE8F5" />
+              <FloatingRing position={[-3, -1.5, -0.5]} color="#4988C4" />
+              <FloatingSphere position={[-3.5, 1, -1]} />
+              <FloatingSphere position={[3, -1.5, -0.5]} />
+            </group>
 
             <OrbitControls
               enableZoom={false}

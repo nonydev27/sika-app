@@ -4,6 +4,7 @@ import OverviewCards from '@/components/dashboard/OverviewCards'
 import RecentTransactions from '@/components/dashboard/RecentTransactions'
 import BudgetProgress from '@/components/dashboard/BudgetProgress'
 import ChatWidget from '@/components/ai/ChatWidget'
+import UsageBanner from '@/components/dashboard/UsageBanner'
 import Link from 'next/link'
 import { CalendarDays } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
@@ -22,7 +23,8 @@ export default async function DashboardPage() {
   const [
     { data: profile },
     { data: budgets },
-    { data: transactions },
+    { data: recentTransactions },
+    { data: allTransactions },
     { data: todayTx },
   ] = await Promise.all([
     supabase.from('profiles').select('*').eq('user_id', user.id).single(),
@@ -30,6 +32,8 @@ export default async function DashboardPage() {
       .from('budgets')
       .select('*, budget_categories(*)')
       .eq('user_id', user.id)
+      .lte('start_date', today)
+      .gte('end_date', today)
       .order('created_at', { ascending: false })
       .limit(1),
     supabase
@@ -38,6 +42,10 @@ export default async function DashboardPage() {
       .eq('user_id', user.id)
       .order('date', { ascending: false })
       .limit(10),
+    supabase
+      .from('transactions')
+      .select('amount, type, category')
+      .eq('user_id', user.id),
     supabase
       .from('transactions')
       .select('amount, type')
@@ -49,10 +57,30 @@ export default async function DashboardPage() {
   const currency = profile?.currency_preference ?? 'GHS'
   const categories = activeBudget?.budget_categories ?? []
 
-  const totalBudget = Number(activeBudget?.total_amount ?? 0)
-  const totalSpent = (transactions ?? [])
+  // Scope transactions to active budget period if one exists, otherwise current month
+  const periodStart = activeBudget?.start_date ?? new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0]
+  const periodEnd = activeBudget?.end_date ?? today
+
+  const periodTransactions = (allTransactions ?? []).filter(
+    (t) => t.date >= periodStart && t.date <= periodEnd
+  )
+
+  // Budget = active budget total, or monthly_income from profile as fallback
+  const totalBudget = activeBudget
+    ? Number(activeBudget.total_amount)
+    : Number(profile?.monthly_income ?? 0)
+
+  const totalSpent = periodTransactions
     .filter((t) => t.type === 'expense')
     .reduce((sum: number, t: { amount: number }) => sum + Number(t.amount), 0)
+
+  const totalIncome = periodTransactions
+    .filter((t) => t.type === 'income')
+    .reduce((sum: number, t: { amount: number }) => sum + Number(t.amount), 0)
+
+  // Savings: logged income this period vs expenses, fall back to profile monthly_income
+  const effectiveIncome = totalIncome > 0 ? totalIncome : Number(profile?.monthly_income ?? 0)
+  const netSavings = Math.max(0, effectiveIncome - totalSpent)
 
   // Daily budget calculation
   const totalBudgetAmt = Number(activeBudget?.total_amount ?? 0)
@@ -88,11 +116,17 @@ export default async function DashboardPage() {
         totalBudget={totalBudget}
         totalSpent={totalSpent}
         currency={currency}
-        savingsGoal={profile?.savings_goal ?? 0}
-        transactionCount={(transactions ?? []).length}
+        savingsGoal={Number(profile?.savings_goal ?? 0)}
+        netSavings={netSavings}
+        usingProfileIncome={totalIncome === 0 && Number(profile?.monthly_income ?? 0) > 0}
+        transactionCount={(recentTransactions ?? []).length}
+        hasBudget={!!activeBudget}
+        periodStart={periodStart}
+        periodEnd={periodEnd}
       />
 
       {/* Today's daily tracker banner */}
+      <UsageBanner />
       <Link href="/dashboard/daily" className="block mb-6">
         <div className="bg-white rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow">
           <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -127,11 +161,14 @@ export default async function DashboardPage() {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentTransactions transactions={transactions ?? []} currency={currency} />
+        <RecentTransactions transactions={recentTransactions ?? []} currency={currency} />
         <BudgetProgress
           categories={categories}
-          transactions={transactions ?? []}
+          transactions={periodTransactions}
           currency={currency}
+          budgetStart={periodStart}
+          budgetEnd={periodEnd}
+          hasBudget={!!activeBudget}
         />
       </div>
 

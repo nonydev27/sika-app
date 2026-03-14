@@ -54,6 +54,19 @@ export default function ChatWidget() {
         body: JSON.stringify({ message: msg, conversationId: conversationIdRef.current }),
       })
 
+      if (response.status === 429) {
+        const data = await response.json()
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: `⚠️ ${data.message ?? "You've reached your free AI chat limit for this month."}\n\nUpgrade to Pro (₵5/month) in Settings to get unlimited access.`,
+          },
+        ])
+        setStreaming(false)
+        return
+      }
+
       if (!response.ok) throw new Error('Failed to get response')
 
       const convId = response.headers.get('X-Conversation-Id')
