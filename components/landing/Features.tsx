@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { BarChart3, Receipt, LineChart, Bot, GraduationCap, Bell } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
-
+import imageUrl from '/Screenshot.png'
 const LEFT_FEATURES = [
   {
     Icon: BarChart3,
@@ -170,7 +170,7 @@ export default function Features() {
 
               //git cganhe
               <Image
-                src="/screenshot.png"
+                src={imageUrl}
                 alt="CediSmart dashboard"
                 width={1400}
                 height={900}
