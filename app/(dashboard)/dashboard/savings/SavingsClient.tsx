@@ -51,7 +51,15 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
   const [receiptText, setReceiptText] = useState('')
   const [parsing, setParsing] = useState(false)
   const [parseError, setParseError] = useState('')
-  const [parsed, setParsed] = useState<{ amount: number; type: string; description: string; confidence: string } | null>(null)
+  const [parsed, setParsed] = useState<{
+    amount: number
+    type: string
+    description: string
+    confidence: string
+    suggestedSavingsType?: 'deposit' | 'withdrawal'
+    nameMatched?: boolean
+    matchReason?: string
+  } | null>(null)
 
   const totalSaved = accounts.reduce((s, a) => s + a.current_amount, 0)
   const totalTarget = accounts.reduce((s, a) => s + a.target_amount, 0)
@@ -104,7 +112,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
       const res = await fetch('/api/ai/parse-receipt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: receiptText }),
+        body: JSON.stringify({ text: receiptText, context: 'savings' }),
       })
       const data = await res.json()
       if (data.error) { setParseError(data.error) }
@@ -112,8 +120,9 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
         setParsed(data)
         setTxAmount(String(data.amount))
         setTxDesc(data.description)
-        // Savings receipts: received = deposit, sent = withdrawal
-        setTxType(data.type === 'income' ? 'deposit' : 'withdrawal')
+        // Use AI name-match suggestion if available, else fall back to income/expense
+        const suggested = data.suggestedSavingsType ?? (data.type === 'income' ? 'deposit' : 'withdrawal')
+        setTxType(suggested)
       }
     } catch { setParseError('Network error — try again.') }
     finally { setParsing(false) }
@@ -296,11 +305,28 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
                     ) : (
                       <>
                         {parsed && (
-                          <div className="flex items-center gap-2 text-xs font-medium text-green-700 bg-green-50 rounded-lg px-3 py-2">
-                            <CheckCircle2 size={12} /> Details extracted — review below
-                            <span className={`ml-auto px-2 py-0.5 rounded-full text-xs ${parsed.confidence === 'high' ? 'bg-green-100 text-green-700' : parsed.confidence === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-600'}`}>
-                              {parsed.confidence}
-                            </span>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-xs font-medium text-green-700 bg-green-50 rounded-lg px-3 py-2">
+                              <CheckCircle2 size={12} /> Details extracted — review below
+                              <span className={`ml-auto px-2 py-0.5 rounded-full text-xs ${parsed.confidence === 'high' ? 'bg-green-100 text-green-700' : parsed.confidence === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-600'}`}>
+                                {parsed.confidence}
+                              </span>
+                            </div>
+                            {/* Name-match explanation */}
+                            {parsed.matchReason && (
+                              <div className={`flex items-start gap-2 text-xs rounded-lg px-3 py-2 ${
+                                parsed.suggestedSavingsType === 'deposit'
+                                  ? 'bg-blue-50 text-blue-700'
+                                  : 'bg-orange-50 text-orange-700'
+                              }`}>
+                                <span className="mt-0.5 flex-shrink-0">
+                                  {parsed.suggestedSavingsType === 'deposit' ? '↓' : '↑'}
+                                </span>
+                                <span>
+                                  <span className="font-semibold capitalize">{parsed.suggestedSavingsType}</span> suggested — {parsed.matchReason}
+                                </span>
+                              </div>
+                            )}
                           </div>
                         )}
                         {/* Type toggle */}

@@ -322,45 +322,48 @@ export default function AppTour({ autoStart = false }: { autoStart?: boolean }) 
               </button>
             </div>
 
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">{step.body}</p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-5">{step.body}</p>
 
             {/* Footer */}
-            <div className="flex items-center justify-between gap-2">
-              {/* Step dots */}
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                {STEPS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    className={`rounded-full transition-all duration-200 ${i === stepIdx ? 'w-5 h-1.5 bg-primary' : 'w-1.5 h-1.5 bg-gray-200 hover:bg-gray-300'}`}
-                  />
-                ))}
-              </div>
-
-              {/* Nav */}
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <span className="text-xs text-gray-400">{stepIdx + 1}/{STEPS.length}</span>
+            <div className="space-y-3">
+              {/* Nav buttons row */}
+              <div className="flex items-center gap-2">
                 {stepIdx > 0 && (
                   <button
                     onClick={() => goTo(stepIdx - 1)}
-                    className="w-8 h-8 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors"
+                    className="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors flex-shrink-0"
                   >
-                    <ChevronLeft size={14} />
+                    <ChevronLeft size={15} />
                   </button>
                 )}
                 <button
                   onClick={() => goTo(stepIdx + 1)}
-                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-mid text-white text-xs font-semibold px-4 py-2 rounded-xl transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 bg-primary hover:bg-primary-mid text-white text-sm font-semibold py-2.5 rounded-xl transition-colors"
                 >
-                  {stepIdx === STEPS.length - 1 ? 'Done' : 'Next'}
-                  {stepIdx < STEPS.length - 1 && <ChevronRight size={13} />}
+                  {stepIdx === STEPS.length - 1 ? 'Finish Tour' : 'Next'}
+                  {stepIdx < STEPS.length - 1 && <ChevronRight size={14} />}
                 </button>
               </div>
-            </div>
 
-            <button onClick={completeTour} className="mt-3 text-xs text-gray-400 hover:text-gray-600 transition-colors w-full text-center">
-              Skip tour
-            </button>
+              {/* Progress dots + skip */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  {STEPS.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goTo(i)}
+                      className={`rounded-full transition-all duration-200 ${i === stepIdx ? 'w-5 h-1.5 bg-primary' : 'w-1.5 h-1.5 bg-gray-200 hover:bg-gray-300'}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-300">{stepIdx + 1}/{STEPS.length}</span>
+                  <button onClick={completeTour} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
+                    Skip
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
