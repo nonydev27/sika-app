@@ -71,14 +71,14 @@ export default function BudgetManager({
     <div>
       <div className="flex items-center justify-between mb-6">
         <div />
-        <button onClick={() => setShowForm(!showForm)} className="btn-primary">
+        <button onClick={() => setShowForm(!showForm)} className="btn-primary" data-tour="budget-new-btn">
           {showForm ? 'Cancel' : '+ New Budget'}
         </button>
       </div>
 
       {/* Budget creation form */}
       {showForm && (
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 border-2 border-primary/20">
+        <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 border-2 border-primary/20" data-tour="budget-form">
           <h3 className="font-semibold text-primary-dark mb-5">Create Budget</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -150,7 +150,7 @@ export default function BudgetManager({
           <p className="text-sm mt-1">Create your first budget to start tracking</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4" data-tour="budget-list">
           {budgets.map((budget) => (
             <div key={budget.id} className="bg-white rounded-2xl shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">

@@ -135,7 +135,7 @@ export default function DailyClient({ todayTx, yesterdaySpent, dailyBudget, curr
   return (
     <div className="space-y-6">
       {/* Daily summary cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4" data-tour="daily-summary-cards">
         <div className="bg-primary-dark rounded-2xl p-5 col-span-2 lg:col-span-1">
           <p className="text-xs text-primary-light mb-1">Daily Budget</p>
           <p className="text-2xl font-bold text-white">{formatCurrency(dailyBudget, currency)}</p>
@@ -165,7 +165,7 @@ export default function DailyClient({ todayTx, yesterdaySpent, dailyBudget, curr
       </div>
 
       {/* Daily progress bar */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
+      <div className="bg-white rounded-2xl shadow-sm p-6" data-tour="daily-progress">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-semibold text-primary-dark">Today&apos;s Progress</h3>
@@ -194,13 +194,14 @@ export default function DailyClient({ todayTx, yesterdaySpent, dailyBudget, curr
       </div>
 
       {/* Transactions panel */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
+      <div className="bg-white rounded-2xl shadow-sm p-6" data-tour="daily-transactions-panel">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-primary-dark">Today&apos;s Transactions</h3>
           {!showForm && (
             <div className="flex items-center gap-2">
               <button
                 onClick={() => { setFormMode('receipt'); setShowForm(true) }}
+                data-tour="daily-paste-receipt"
                 className="flex items-center gap-1.5 border border-primary text-primary text-sm font-medium px-3 py-2 rounded-xl hover:bg-primary/5 transition-colors"
               >
                 <ScanText size={14} />
@@ -208,6 +209,7 @@ export default function DailyClient({ todayTx, yesterdaySpent, dailyBudget, curr
               </button>
               <button
                 onClick={() => { setFormMode('manual'); setShowForm(true) }}
+                data-tour="daily-add-btn"
                 className="flex items-center gap-1.5 bg-primary text-white text-sm font-medium px-3 py-2 rounded-xl hover:bg-primary-mid transition-colors"
               >
                 <Plus size={14} />

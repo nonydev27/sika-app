@@ -3,14 +3,24 @@
 import { useState, useTransition } from 'react'
 import { updateProfile } from './actions'
 import { UNIVERSITIES, INCOME_SOURCES, TRANSPORT_MODES, CURRENCY_OPTIONS, BUDGET_PERIODS } from '@/lib/constants'
-import { CheckCircle2, FileText } from 'lucide-react'
+import { CheckCircle2, FileText, CreditCard, Map } from 'lucide-react'
 import Link from 'next/link'
+import { TOUR_STORAGE_KEY, TOUR_RESTART_KEY } from '@/components/dashboard/AppTour'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SettingsClient({ profile }: { profile: any }) {
   const [isPending, startTransition] = useTransition()
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
+  const [tourRestarted, setTourRestarted] = useState(false)
+
+  const handleRestartTour = () => {
+    localStorage.removeItem(TOUR_STORAGE_KEY)
+    localStorage.setItem(TOUR_RESTART_KEY, 'true')
+    setTourRestarted(true)
+    // Navigate to dashboard where the tour will auto-start
+    window.location.href = '/dashboard'
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -155,6 +165,31 @@ export default function SettingsClient({ profile }: { profile: any }) {
           className="flex items-center gap-2 bg-primary text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-primary-mid transition-colors">
           <FileText size={14} /> Export
         </Link>
+      </div>
+    </div>
+
+    {/* App Tour */}
+    <div className="bg-white rounded-2xl shadow-sm p-6 max-w-2xl mt-6 border border-primary/10">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Map size={18} className="text-primary" />
+          </div>
+          <div>
+            <h2 className="font-semibold text-primary-dark">App Tour</h2>
+            <p className="text-sm text-gray-500 mt-0.5">
+              {tourRestarted ? 'Tour will start on the dashboard' : 'Replay the guided walkthrough of CediSmart'}
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={handleRestartTour}
+          disabled={tourRestarted}
+          className="flex items-center gap-2 bg-primary-dark text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-primary-mid transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          <Map size={14} />
+          {tourRestarted ? 'Redirecting…' : 'Restart Tour'}
+        </button>
       </div>
     </div>
     </>

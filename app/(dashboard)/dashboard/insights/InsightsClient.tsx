@@ -1,40 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-import { Loader2, TrendingUp, AlertTriangle, CheckCircle2, Lightbulb, Calendar, Zap, RefreshCw, Lock } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Loader2, TrendingUp, AlertTriangle, CheckCircle2, Lightbulb, Calendar, Zap, RefreshCw, Lock, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
-interface Pattern {
-  type: 'warning' | 'info' | 'success'
-  title: string
-  detail: string
-}
-
-interface Recommendation {
-  priority: 'high' | 'medium' | 'low'
-  title: string
-  detail: string
-  saving: number | null
-}
-
-interface SavingsTiming {
-  bestDays: string[]
-  worstDays: string[]
-  advice: string
-}
-
+interface Pattern { type: 'warning' | 'info' | 'success'; title: string; detail: string }
+interface Recommendation { priority: 'high' | 'medium' | 'low'; title: string; detail: string; saving: number | null }
+interface SavingsTiming { bestDays: string[]; worstDays: string[]; advice: string }
 interface Insights {
-  healthScore: number
-  healthLabel: string
-  healthSummary: string
-  patterns: Pattern[]
-  recommendations: Recommendation[]
-  savingsTiming: SavingsTiming
-  topRisk: string
-  quickWins: string[]
-  _cachedAt?: string
-  _cached?: boolean
+  healthScore: number; healthLabel: string; healthSummary: string
+  patterns: Pattern[]; recommendations: Recommendation[]
+  savingsTiming: SavingsTiming; topRisk: string; quickWins: string[]
+  _cachedAt?: string; _cached?: boolean
 }
+interface CacheStatus { hasFreshCache: boolean; isVeryFresh: boolean; cachedAt: string | null; ageHours: number }
 
 const patternIcon = { warning: AlertTriangle, info: Lightbulb, success: CheckCircle2 }
 const patternColors = {
@@ -43,7 +22,6 @@ const patternColors = {
   success: 'bg-green-50 border-green-200 text-green-800',
 }
 const patternIconColors = { warning: 'text-yellow-500', info: 'text-blue-500', success: 'text-green-500' }
-
 const priorityColors = {
   high: 'bg-red-50 text-red-600 border-red-200',
   medium: 'bg-yellow-50 text-yellow-700 border-yellow-200',
@@ -51,11 +29,8 @@ const priorityColors = {
 }
 
 function HealthRing({ score, label }: { score: number; label: string }) {
-  const r = 52
-  const circ = 2 * Math.PI * r
-  const dash = (score / 100) * circ
+  const r = 52; const circ = 2 * Math.PI * r; const dash = (score / 100) * circ
   const color = score >= 75 ? '#16a34a' : score >= 50 ? '#4988C4' : score >= 30 ? '#f59e0b' : '#dc2626'
-
   return (
     <div className="flex flex-col items-center">
       <svg width="128" height="128" viewBox="0 0 128 128">
@@ -76,8 +51,17 @@ export default function InsightsClient({ currency }: { currency: string; name: s
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [limitReached, setLimitReached] = useState(false)
+  const [cacheStatus, setCacheStatus] = useState<CacheStatus | null>(null)
 
   const sym = currency === 'USD' ? '$' : '₵'
+
+  // On mount: check if background analysis already produced a fresh cache
+  useEffect(() => {
+    fetch('/api/ai/cache-status')
+      .then((r) => r.json())
+      .then((s: CacheStatus) => setCacheStatus(s))
+      .catch(() => {})
+  }, [])
 
   const fetchInsights = async (force = false) => {
     setLoading(true)
@@ -89,17 +73,12 @@ export default function InsightsClient({ currency }: { currency: string; name: s
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ force }),
       })
-
-      if (res.status === 429) {
-        setLimitReached(true)
-        setLoading(false)
-        return
-      }
-
+      if (res.status === 429) { setLimitReached(true); setLoading(false); return }
       if (!res.ok) throw new Error('Failed')
       const data = await res.json()
       if (data.error) throw new Error(data.error)
       setInsights(data)
+      setCacheStatus({ hasFreshCache: true, isVeryFresh: true, cachedAt: new Date().toISOString(), ageHours: 0 })
     } catch {
       setError('Could not generate insights. Please try again.')
     } finally {
@@ -107,61 +86,76 @@ export default function InsightsClient({ currency }: { currency: string; name: s
     }
   }
 
-  if (limitReached) {
-    return (
-      <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-yellow-50 flex items-center justify-center mx-auto mb-4">
-          <Lock size={28} className="text-yellow-500" />
+  // ── Limit reached ──
+  if (limitReached) return (
+    <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
+      <div className="w-16 h-16 rounded-2xl bg-yellow-50 flex items-center justify-center mx-auto mb-4">
+        <Lock size={28} className="text-yellow-500" />
+      </div>
+      <h2 className="text-lg font-semibold text-primary-dark mb-2">Monthly limit reached</h2>
+      <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
+        You&apos;ve used your 5 free AI insights this month. Upgrade to Pro for unlimited analyses.
+      </p>
+      <Link href="/dashboard/billing" className="btn-primary inline-flex items-center gap-2">
+        <Zap size={15} /> Upgrade to Pro — {sym}5/month
+      </Link>
+    </div>
+  )
+
+  // ── Empty state (no insights loaded yet) ──
+  if (!insights && !loading) return (
+    <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
+      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+        <TrendingUp size={28} className="text-primary" />
+      </div>
+      <h2 className="text-lg font-semibold text-primary-dark mb-2">Ready to analyse your finances</h2>
+      <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
+        Cedi AI will study all your transactions, spending patterns, and savings to give you personalised recommendations.
+      </p>
+
+      {/* Cache-ready badge */}
+      {cacheStatus?.hasFreshCache && (
+        <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-xs font-medium px-3 py-1.5 rounded-full mb-5">
+          <Sparkles size={12} />
+          Analysis ready — results will load instantly
         </div>
-        <h2 className="text-lg font-semibold text-primary-dark mb-2">Monthly limit reached</h2>
-        <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
-          You&apos;ve used your 5 free AI insights this month. Upgrade to Pro for unlimited analyses.
-        </p>
-        <Link href="/dashboard/settings#upgrade" className="btn-primary inline-flex items-center gap-2">
-          <Zap size={15} /> Upgrade to Pro — {sym}5/month
-        </Link>
-      </div>
-    )
-  }
+      )}
 
-  if (!insights && !loading) {
-    return (
-      <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-          <TrendingUp size={28} className="text-primary" />
-        </div>
-        <h2 className="text-lg font-semibold text-primary-dark mb-2">Ready to analyse your finances</h2>
-        <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
-          Cedi AI will study all your transactions, spending patterns, and savings to give you personalised recommendations.
-        </p>
-        <button onClick={() => fetchInsights(false)} className="btn-primary inline-flex items-center gap-2">
-          <Zap size={15} /> Generate Insights
+      <div className="flex flex-col items-center gap-3">
+        <button onClick={() => fetchInsights(false)} className="btn-primary inline-flex items-center gap-2" data-tour="insights-generate-btn">
+          <Zap size={15} />
+          {cacheStatus?.hasFreshCache ? 'Load Insights (instant)' : 'Generate Insights'}
         </button>
+        {cacheStatus && !cacheStatus.hasFreshCache && (
+          <p className="text-xs text-gray-400">Background analysis will run automatically when you have enough data</p>
+        )}
       </div>
-    )
-  }
+    </div>
+  )
 
-  if (loading) {
-    return (
-      <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-        <Loader2 size={32} className="animate-spin text-primary mx-auto mb-4" />
-        <p className="text-sm font-medium text-primary-dark">Analysing your financial data…</p>
-        <p className="text-xs text-gray-400 mt-1">This takes a few seconds</p>
-      </div>
-    )
-  }
+  // ── Loading ──
+  if (loading) return (
+    <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
+      <Loader2 size={32} className="animate-spin text-primary mx-auto mb-4" />
+      <p className="text-sm font-medium text-primary-dark">
+        {cacheStatus?.hasFreshCache ? 'Loading your analysis…' : 'Analysing your financial data…'}
+      </p>
+      <p className="text-xs text-gray-400 mt-1">
+        {cacheStatus?.hasFreshCache ? 'Just a moment' : 'This takes a few seconds'}
+      </p>
+    </div>
+  )
 
-  if (error) {
-    return (
-      <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-        <AlertTriangle size={32} className="text-yellow-500 mx-auto mb-3" />
-        <p className="text-sm text-gray-600 mb-4">{error}</p>
-        <button onClick={() => fetchInsights(false)} className="btn-primary inline-flex items-center gap-2">
-          <RefreshCw size={14} /> Try Again
-        </button>
-      </div>
-    )
-  }
+  // ── Error ──
+  if (error) return (
+    <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
+      <AlertTriangle size={32} className="text-yellow-500 mx-auto mb-3" />
+      <p className="text-sm text-gray-600 mb-4">{error}</p>
+      <button onClick={() => fetchInsights(false)} className="btn-primary inline-flex items-center gap-2">
+        <RefreshCw size={14} /> Try Again
+      </button>
+    </div>
+  )
 
   if (!insights) return null
 
@@ -171,26 +165,36 @@ export default function InsightsClient({ currency }: { currency: string; name: s
 
   return (
     <div className="space-y-6">
-      {/* Refresh button + cache info */}
+      {/* Toolbar */}
       <div className="flex items-center justify-between">
-        {insights._cached && cacheAge !== null && (
-          <p className="text-xs text-gray-400">
-            Cached {cacheAge < 1 ? 'just now' : `${cacheAge}h ago`}
-            {' · '}
-            <button onClick={() => fetchInsights(true)} className="text-primary hover:underline">
-              Force refresh
+        <div className="flex items-center gap-2">
+          {insights._cached && cacheAge !== null && (
+            <span className="text-xs text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">
+              {cacheAge < 1 ? 'Cached just now' : `Cached ${cacheAge}h ago`}
+            </span>
+          )}
+          {!insights._cached && (
+            <span className="text-xs text-green-600 bg-green-50 px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Sparkles size={10} /> Fresh analysis
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-3">
+          <button onClick={() => fetchInsights(false)} disabled={loading}
+            className="flex items-center gap-1.5 text-sm text-primary hover:text-primary-mid transition-colors">
+            <RefreshCw size={13} /> Refresh
+          </button>
+          {insights._cached && (
+            <button onClick={() => fetchInsights(true)} disabled={loading}
+              className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors">
+              Force new
             </button>
-          </p>
-        )}
-        {!insights.fromCache && <span />}
-        <button onClick={() => fetchInsights(false)} disabled={loading}
-          className="flex items-center gap-2 text-sm text-primary hover:text-primary-mid transition-colors ml-auto">
-          <RefreshCw size={13} /> Refresh Analysis
-        </button>
+          )}
+        </div>
       </div>
 
-      {/* Health score + summary */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
+      {/* Health score */}
+      <div className="bg-white rounded-2xl shadow-sm p-6" data-tour="insights-health">
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <HealthRing score={insights.healthScore} label={insights.healthLabel} />
           <div className="flex-1 text-center sm:text-left">
@@ -258,8 +262,7 @@ export default function InsightsClient({ currency }: { currency: string; name: s
                   </span>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed">{r.detail}
-</p>
+              <p className="text-xs text-gray-500 leading-relaxed">{r.detail}</p>
             </div>
           ))}
         </div>

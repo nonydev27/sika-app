@@ -10,24 +10,35 @@ export default async function StatsPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
+  const today = new Date().toISOString().split('T')[0]
+
   const [{ data: transactions }, { data: budgets }, { data: profile }] = await Promise.all([
     supabase.from('transactions').select('*').eq('user_id', user.id),
     supabase
       .from('budgets')
       .select('*, budget_categories(*)')
       .eq('user_id', user.id)
+      .lte('start_date', today)
+      .gte('end_date', today)
       .order('created_at', { ascending: false })
       .limit(1),
-    supabase.from('profiles').select('currency_preference, savings_goal').eq('user_id', user.id).single(),
+    supabase.from('profiles').select('currency_preference, savings_goal, monthly_income').eq('user_id', user.id).single(),
   ])
 
   const currency = profile?.currency_preference ?? 'GHS'
   // Ensure amounts are always numbers (Supabase numeric → can be string)
   const allTx = (transactions ?? []).map((t) => ({ ...t, amount: Number(t.amount) }))
-  const activeBudget = budgets?.[0]
+  const activeBudget = budgets?.[0] ?? null
 
-  // Category spending breakdown
-  const categorySpending = allTx
+  // Scope to active budget period, or current month as fallback
+  const periodStart = activeBudget?.start_date
+    ?? new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0]
+  const periodEnd = activeBudget?.end_date ?? today
+
+  const periodTx = allTx.filter((t) => t.date >= periodStart && t.date <= periodEnd)
+
+  // Category spending — period-scoped (matches dashboard BudgetProgress)
+  const categorySpending = periodTx
     .filter((t) => t.type === 'expense')
     .reduce<Record<string, number>>((acc, t) => {
       acc[t.category] = (acc[t.category] ?? 0) + t.amount
@@ -38,7 +49,7 @@ export default async function StatsPage() {
     .map(([category, amount]) => ({ category, amount }))
     .sort((a, b) => b.amount - a.amount)
 
-  // 6-month trend
+  // 6-month trend — always all-time for trend chart (intentional)
   const monthlyData = Array.from({ length: 6 }, (_, i) => {
     const date = subMonths(new Date(), 5 - i)
     const start = startOfMonth(date).toISOString().split('T')[0]
@@ -51,7 +62,7 @@ export default async function StatsPage() {
     }
   })
 
-  // Budget vs actual
+  // Budget vs actual — period-scoped spending against budget allocations
   const budgetBarData = (activeBudget?.budget_categories ?? []).map(
     (cat: { category_name: string; allocated_amount: number }) => ({
       category: cat.category_name,
@@ -60,27 +71,35 @@ export default async function StatsPage() {
     })
   )
 
-  const totalSpent = allTx.filter((t) => t.type === 'expense').reduce((s, t) => s + t.amount, 0)
-  const totalIncome = allTx.filter((t) => t.type === 'income').reduce((s, t) => s + t.amount, 0)
-  const net = totalIncome - totalSpent
+  // Summary totals — period-scoped to match dashboard
+  const totalSpent = periodTx.filter((t) => t.type === 'expense').reduce((s, t) => s + t.amount, 0)
+  const totalIncome = periodTx.filter((t) => t.type === 'income').reduce((s, t) => s + t.amount, 0)
+  const effectiveIncome = totalIncome > 0 ? totalIncome : Number(profile?.monthly_income ?? 0)
+  const net = effectiveIncome - totalSpent
   const topCategory = pieData[0]
 
+  const periodLabel = activeBudget
+    ? `${format(new Date(periodStart), 'MMM d')} – ${format(new Date(periodEnd), 'MMM d, yyyy')}`
+    : format(new Date(), 'MMMM yyyy')
+
   const summaryCards = [
-    { label: 'Total Expenses', value: formatCurrency(totalSpent, currency), Icon: TrendingDown, color: 'text-red-500' },
-    { label: 'Total Income', value: formatCurrency(totalIncome, currency), Icon: TrendingUp, color: 'text-green-600' },
-    { label: 'Net Balance', value: formatCurrency(net, currency), Icon: Scale, color: net >= 0 ? 'text-green-600' : 'text-red-500' },
-    { label: 'Top Category', value: topCategory?.category ?? '—', Icon: Award, color: 'text-primary-dark' },
+    { label: 'Total Expenses', value: formatCurrency(totalSpent, currency), Icon: TrendingDown, color: 'text-red-500', sub: periodLabel },
+    { label: 'Total Income', value: formatCurrency(totalIncome > 0 ? totalIncome : Number(profile?.monthly_income ?? 0), currency), Icon: TrendingUp, color: 'text-green-600', sub: totalIncome > 0 ? periodLabel : 'From profile' },
+    { label: 'Net Balance', value: formatCurrency(Math.abs(net), currency), Icon: Scale, color: net >= 0 ? 'text-green-600' : 'text-red-500', sub: net >= 0 ? 'Surplus' : 'Deficit' },
+    { label: 'Top Category', value: topCategory?.category ?? '—', Icon: Award, color: 'text-primary-dark', sub: topCategory ? formatCurrency(topCategory.amount, currency) : 'No expenses yet' },
   ]
 
   return (
     <>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-primary-dark">Statistics</h1>
-        <p className="text-gray-500 text-sm mt-1">Your financial overview at a glance</p>
+        <p className="text-gray-500 text-sm mt-1">
+          {activeBudget ? `Budget period: ${periodLabel}` : `Showing: ${periodLabel}`}
+        </p>
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" data-tour="stats-summary">
         {summaryCards.map((card) => (
           <div key={card.label} className="bg-white rounded-2xl shadow-sm p-5">
             <div className="flex items-center justify-between mb-2">
@@ -88,11 +107,12 @@ export default async function StatsPage() {
               <card.Icon size={16} className="text-gray-300" />
             </div>
             <p className={`text-lg font-bold ${card.color}`}>{card.value}</p>
+            <p className="text-xs text-gray-400 mt-0.5">{card.sub}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6" data-tour="stats-charts">
         <div className="bg-white rounded-2xl shadow-sm p-6">
           <h2 className="font-semibold text-primary-dark mb-4">Spending by Category</h2>
           <SpendingPie data={pieData} currency={currency} />

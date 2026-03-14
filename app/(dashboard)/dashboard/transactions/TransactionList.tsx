@@ -76,14 +76,15 @@ export default function TransactionList({
   return (
     <div>
       {/* Toolbar */}
-      <div className="flex gap-3 mb-6 flex-wrap">
+      <div className="flex gap-3 mb-6 flex-wrap" data-tour="tx-toolbar">
         <input
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           placeholder="Search transactions…"
           className="input-field max-w-xs"
+          data-tour="tx-search"
         />
-        <button onClick={() => setShowForm(!showForm)} className="btn-primary ml-auto">
+        <button onClick={() => setShowForm(!showForm)} className="btn-primary ml-auto" data-tour="tx-add-btn">
           {showForm ? 'Cancel' : '+ Add Transaction'}
         </button>
       </div>
@@ -141,7 +142,7 @@ export default function TransactionList({
       )}
 
       {/* Transaction list */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden" data-tour="tx-list">
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
             <CreditCard size={36} className="mx-auto mb-3 opacity-30" />

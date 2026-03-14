@@ -123,11 +123,12 @@ export default async function DashboardPage() {
         hasBudget={!!activeBudget}
         periodStart={periodStart}
         periodEnd={periodEnd}
+        tourAttr="overview-cards"
       />
 
       {/* Today's daily tracker banner */}
       <UsageBanner />
-      <Link href="/dashboard/daily" className="block mb-6">
+      <Link href="/dashboard/daily" className="block mb-6" data-tour="daily-banner">
         <div className="bg-white rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow">
           <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
             <CalendarDays size={20} className="text-primary" />
@@ -161,18 +162,22 @@ export default async function DashboardPage() {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentTransactions transactions={recentTransactions ?? []} currency={currency} />
-        <BudgetProgress
-          categories={categories}
-          transactions={periodTransactions}
-          currency={currency}
-          budgetStart={periodStart}
-          budgetEnd={periodEnd}
-          hasBudget={!!activeBudget}
-        />
+        <div data-tour="recent-transactions">
+          <RecentTransactions transactions={recentTransactions ?? []} currency={currency} />
+        </div>
+        <div data-tour="budget-progress">
+          <BudgetProgress
+            categories={categories}
+            transactions={periodTransactions}
+            currency={currency}
+            budgetStart={periodStart}
+            budgetEnd={periodEnd}
+            hasBudget={!!activeBudget}
+          />
+        </div>
       </div>
 
-      <ChatWidget />
+      <ChatWidget tourAttr="chat-widget" />
     </>
   )
 }

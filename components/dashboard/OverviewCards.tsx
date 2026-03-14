@@ -13,11 +13,12 @@ interface Props {
   usingProfileIncome: boolean
   periodStart: string
   periodEnd: string
+  tourAttr?: string
 }
 
 export default function OverviewCards({
   totalBudget, totalSpent, currency, savingsGoal, netSavings,
-  hasBudget, usingProfileIncome, periodStart, periodEnd,
+  hasBudget, usingProfileIncome, periodStart, periodEnd, tourAttr,
 }: Props) {
   const remaining = totalBudget - totalSpent
   const spentPct = totalBudget > 0 ? Math.min((totalSpent / totalBudget) * 100, 100) : 0
@@ -79,7 +80,7 @@ export default function OverviewCards({
   ]
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" data-tour={tourAttr}>
       {cards.map((card) => (
         <div key={card.label} className={`${card.color} rounded-2xl p-5 shadow-sm`}>
           <div className="flex items-center justify-between mb-3">

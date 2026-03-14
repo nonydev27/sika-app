@@ -122,7 +122,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
   return (
     <div className="space-y-6">
       {/* Summary bar */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4" data-tour="savings-summary">
         <div className="bg-primary-dark rounded-2xl p-5">
           <p className="text-xs text-primary-light mb-1">Total Saved</p>
           <p className="text-2xl font-bold text-white">{formatCurrency(totalSaved, currency)}</p>
@@ -146,6 +146,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
       <div className="flex justify-end">
         <button
           onClick={() => setShowNewAccount(!showNewAccount)}
+          data-tour="savings-new-btn"
           className="flex items-center gap-2 bg-primary text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-primary-mid transition-colors"
         >
           {showNewAccount ? <X size={14} /> : <Plus size={14} />}
@@ -191,7 +192,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
           <p className="text-sm mt-1">Create one to start tracking your savings</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4" data-tour="savings-accounts">
           {accounts.map((account) => {
             const pct = account.target_amount > 0 ? Math.min((account.current_amount / account.target_amount) * 100, 100) : 0
             const isExpanded = expandedId === account.id

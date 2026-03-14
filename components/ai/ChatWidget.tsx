@@ -15,7 +15,7 @@ const QUICK_PROMPTS = [
   'How much have I spent on food?',
 ]
 
-export default function ChatWidget() {
+export default function ChatWidget({ tourAttr }: { tourAttr?: string }) {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
@@ -104,6 +104,7 @@ export default function ChatWidget() {
         onClick={() => setIsOpen(true)}
         className="fixed bottom-24 md:bottom-8 right-6 w-14 h-14 bg-primary-dark hover:bg-primary-mid rounded-full shadow-xl flex items-center justify-center z-50 transition-colors"
         title="Chat with Cedi AI"
+        data-tour={tourAttr}
       >
         <MessageCircle size={22} className="text-white" />
       </button>

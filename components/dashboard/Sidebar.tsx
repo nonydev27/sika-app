@@ -9,13 +9,13 @@ import {
 } from 'lucide-react'
 
 const NAV = [
-  { href: '/dashboard',              label: 'Dashboard',    icon: LayoutDashboard },
-  { href: '/dashboard/daily',        label: 'Daily',        icon: CalendarDays },
-  { href: '/dashboard/budget',       label: 'Budget',       icon: PieChart },
-  { href: '/dashboard/transactions', label: 'Transactions', icon: ArrowLeftRight },
-  { href: '/dashboard/savings',      label: 'Savings',      icon: PiggyBank },
-  { href: '/dashboard/stats',        label: 'Statistics',   icon: TrendingUp },
-  { href: '/dashboard/insights',     label: 'AI Insights',  icon: Sparkles },
+  { href: '/dashboard',              label: 'Dashboard',    icon: LayoutDashboard, tour: 'dashboard' },
+  { href: '/dashboard/daily',        label: 'Daily',        icon: CalendarDays,    tour: 'daily' },
+  { href: '/dashboard/budget',       label: 'Budget',       icon: PieChart,        tour: 'budget' },
+  { href: '/dashboard/transactions', label: 'Transactions', icon: ArrowLeftRight,  tour: 'transactions' },
+  { href: '/dashboard/savings',      label: 'Savings',      icon: PiggyBank,       tour: 'savings' },
+  { href: '/dashboard/stats',        label: 'Statistics',   icon: TrendingUp,      tour: 'stats' },
+  { href: '/dashboard/insights',     label: 'AI Insights',  icon: Sparkles,        tour: 'insights' },
 ]
 
 const BOTTOM_NAV = [
@@ -60,6 +60,7 @@ export default function Sidebar({ profile }: { profile: { name?: string; univers
             const Icon = item.icon
             return (
               <Link key={item.href} href={item.href}
+                data-tour={item.tour}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                   active ? 'bg-primary text-white' : 'text-primary-light hover:bg-white/10 hover:text-white'
                 }`}>
