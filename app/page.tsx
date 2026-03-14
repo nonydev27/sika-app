@@ -14,7 +14,7 @@ export default function LandingPage() {
       <section id="pricing" className="py-24 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-primary-dark mb-4">Simple, student-friendly pricing</h2>
+            <h2 className="text-4xl font-bold text-primary-dark mb-4 capitalize">Simple, student-friendly pricing</h2>
             <p className="text-gray-500">Start free. Upgrade only if you need more AI power.</p>
           </div>
 
@@ -94,7 +94,7 @@ export default function LandingPage() {
       <section id="how-it-works" className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary-dark mb-4">Get started in minutes</h2>
+            <h2 className="text-4xl font-bold text-primary-dark mb-4 capitalize">Get started in minutes</h2>
             <p className="text-gray-500">No complicated setup. Just sign up and start tracking.</p>
           </div>
 

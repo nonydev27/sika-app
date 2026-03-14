@@ -29,7 +29,7 @@ const LEFT_FEATURES = [
 const RIGHT_FEATURES = [
   {
     Icon: Bot,
-    title: 'Cedi AI Assistant',
+    title: 'Sika App AI Assistant',
     desc: 'Claude-powered coach with real Ghana-specific money advice.',
     gradient: 'from-[#0F2854] to-[#4988C4]',
   },
@@ -42,7 +42,7 @@ const RIGHT_FEATURES = [
   {
     Icon: Bell,
     title: 'Budget Alerts',
-    desc: "Warned at 80% of any category — before it's too late.",
+    desc: "Warned at 80% of any category before it's too late.",
     gradient: 'from-[#4988C4] to-[#0F2854]',
   },
 ]
@@ -164,12 +164,12 @@ export default function Features() {
                 <span className="w-3 h-3 rounded-full bg-[#28c840]" />
                 <div className="flex-1 mx-4 rounded-lg h-6 flex items-center px-3 gap-2" style={{ background: 'rgba(255,255,255,0.07)' }}>
                   <div className="w-2 h-2 rounded-full border border-white/20 flex-shrink-0" />
-                  <span className="text-white/35 text-[11px] font-medium">app.cedismart.com/dashboard</span>
+                  <span className="text-white/35 text-[11px] font-medium">app.sika-app.com/dashboard</span>
                 </div>
               </div>
               <Image
                 src="/screenshot.png"
-                alt="CediSmart dashboard"
+                alt="Sika App dashboard"
                 width={1400}
                 height={900}
                 className="w-full h-auto block"
@@ -212,12 +212,12 @@ export default function Features() {
                 <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                 <div className="flex-1 mx-3 rounded-md h-5 flex items-center px-2.5" style={{ background: 'rgba(255,255,255,0.07)' }}>
-                  <span className="text-white/35 text-[10px]">app.cedismart.com/dashboard</span>
+                  <span className="text-white/35 text-[10px]">app.sika-app.com/dashboard</span>
                 </div>
               </div>
               <Image
                 src="/screenshot.png"
-                alt="CediSmart dashboard"
+                alt="Sika App dashboard"
                 width={1400}
                 height={900}
                 className="w-full h-auto block"

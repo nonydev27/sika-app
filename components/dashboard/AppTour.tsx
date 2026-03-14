@@ -5,8 +5,8 @@ import { createPortal } from 'react-dom'
 import { useRouter, usePathname } from 'next/navigation'
 import { X, ChevronRight, ChevronLeft, Sparkles, Map } from 'lucide-react'
 
-export const TOUR_STORAGE_KEY = 'cedismart_tour_completed'
-export const TOUR_RESTART_KEY = 'cedismart_tour_restart'
+export const TOUR_STORAGE_KEY = 'sikaapp_tour_completed'
+export const TOUR_RESTART_KEY = 'sikaapp_tour_restart'
 
 interface Step {
   target: string
@@ -49,7 +49,7 @@ const STEPS: Step[] = [
   {
     target: '[data-tour="budget-new-btn"]',
     title: 'Create Your Budget',
-    body: 'Set a weekly, monthly, or semester budget. Allocate amounts per category — food, transport, data, entertainment — and CediSmart tracks it all.',
+    body: 'Set a weekly, monthly, or semester budget. Allocate amounts per category — food, transport, data, entertainment — and Sika App tracks it all.',
     placement: 'bottom',
     page: '/dashboard/budget',
   },

@@ -54,7 +54,7 @@ export default function StatementClient({ currency, name, firstDate }: Props) {
   const handleCSV = () => {
     const a = document.createElement('a')
     a.href = buildUrl('csv')
-    a.download = `cedismart-statement-${from || 'all'}-${to || 'now'}.csv`
+    a.download = `sikaapp-statement-${from || 'all'}-${to || 'now'}.csv`
     a.click()
   }
 

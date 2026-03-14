@@ -47,7 +47,7 @@ export default function Sidebar({ profile }: { profile: { name?: string; univers
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center font-bold text-lg">₵</div>
             <div>
-              <p className="font-bold text-sm">CediSmart</p>
+              <p className="font-bold text-sm">Sika App</p>
               <p className="text-xs text-primary-light">Budget tracker</p>
             </div>
           </div>
