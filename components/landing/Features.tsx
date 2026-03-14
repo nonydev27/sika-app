@@ -29,7 +29,7 @@ const LEFT_FEATURES = [
 const RIGHT_FEATURES = [
   {
     Icon: Bot,
-    title: 'Cedi AI Assistant',
+    title: 'Sika App AI Assistant',
     desc: 'Claude-powered coach with real Ghana-specific money advice.',
     gradient: 'from-[#0F2854] to-[#4988C4]',
   },
@@ -42,7 +42,7 @@ const RIGHT_FEATURES = [
   {
     Icon: Bell,
     title: 'Budget Alerts',
-    desc: "Warned at 80% of any category — before it's too late.",
+    desc: "Warned at 80% of any category before it's too late.",
     gradient: 'from-[#4988C4] to-[#0F2854]',
   },
 ]

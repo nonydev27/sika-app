@@ -67,6 +67,11 @@ export default function LoginPage() {
           {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
         </div>
 
+          <div className='flex justify-center text-gray-500'>
+            <p className='text-sm '>
+              Ensure you confirm your email before signing in!
+            </p>
+          </div>
         {serverError && (
           <p className="text-red-500 text-sm bg-red-50 rounded-lg px-4 py-2">{serverError}</p>
         )}
