@@ -114,15 +114,12 @@ export default function Hero() {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pointer-events-none">
         <div className="text-center max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm text-primary-light mb-6">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Built for Ghanaian students
-          </div>
+         
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-4">
-            Budget Smart,
+          <h1 className="text-7xl md:text-6xl font-bold text-white leading-tight mb-4">
+            Sika App,
             <br />
-            <span className="text-primary-light">Study Hard</span>
+            <span className="text-primary-light">Track Your Money</span>
           </h1>
 
           <p className="text-lg text-white/70 max-w-md mx-auto mb-10 leading-relaxed">
@@ -146,12 +143,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">
-        <p className="text-white/40 text-xs">Scroll to explore</p>
-        <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
-        </div>
-      </div>
     </section>
   )
 }

@@ -81,7 +81,7 @@ export default function LoginPage() {
       </form>
 
       <p className="text-center text-sm text-gray-500 mt-6">
-        New to CediSmart?{' '}
+        New to Sika App?{' '}
         <Link href="/signup" className="text-primary font-medium hover:underline">
           Create account
         </Link>

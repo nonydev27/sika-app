@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CediSmart — Budget Smart, Study Hard",
+  title: "Sika App — Track Your Money, Achieve Your Goals",
   description: "The budget planning app built for Ghanaian university students. Track expenses, plan budgets, and get AI-powered financial advice.",
 };
 

@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Force black text in all inputs */
+input, textarea, select {
+  color: black !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #6b7280 !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
