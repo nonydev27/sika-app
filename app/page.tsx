@@ -33,7 +33,7 @@ export default function LandingPage() {
               {
                 step: '03',
                 title: 'Track & improve',
-                desc: 'Log transactions, view statistics, and chat with Cedi AI for personalized money tips.',
+                desc: 'Log transactions, view statistics, and chat with Sika App AI for personalized money tips.',
               },
             ].map((s) => (
               <div key={s.step} className="text-center">
@@ -55,7 +55,7 @@ export default function LandingPage() {
             Ready to take control of your finances?
           </h2>
           <p className="text-primary-light mb-8">
-            Join thousands of Ghanaian students already budgeting smarter with CediSmart.
+            Join thousands of Ghanaian students already budgeting smarter with Sika App.
           </p>
           <Link
             href="/signup"
@@ -72,7 +72,7 @@ export default function LandingPage() {
           <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-sm">
             ₵
           </div>
-          <span className="font-bold text-white">CediSmart</span>
+          <span className="font-bold text-white">Sika App</span>
         </div>
         <p className="text-primary-light text-sm">
           Budget Smart, Study Hard. Made for Ghanaian students.

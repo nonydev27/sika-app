@@ -10,7 +10,7 @@ const Hero = dynamic(() => import('./Hero'), {
         <div className="w-16 h-16 rounded-2xl bg-primary mx-auto mb-4 flex items-center justify-center text-3xl text-white font-bold">
           ₵
         </div>
-        <p className="text-white font-bold text-2xl">CediSmart</p>
+        <p className="text-white font-bold text-2xl">Sika App</p>
         <p className="text-primary-light text-sm mt-2">Loading…</p>
       </div>
     </div>

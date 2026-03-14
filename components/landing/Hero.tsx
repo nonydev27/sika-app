@@ -94,10 +94,7 @@ export default function Hero() {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pointer-events-none">
         <div className="text-center max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm text-primary-light mb-6">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Built for Ghanaian students
-          </div>
+         
 
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-4">
             Budget Smart,

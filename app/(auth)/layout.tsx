@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary mb-4">
             <span className="text-3xl">₵</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">CediSmart</h1>
+          <h1 className="text-2xl font-bold text-white">Sika App</h1>
           <p className="text-primary-light text-sm mt-1">Budget smarter. Study harder.</p>
         </div>
         {children}
