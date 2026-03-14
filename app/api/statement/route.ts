@@ -57,7 +57,7 @@ export async function GET(request: Request) {
     return new Response(csv, {
       headers: {
         'Content-Type': 'text/csv',
-        'Content-Disposition': `attachment; filename="cedismart-statement-${from}-${to}.csv"`,
+        'Content-Disposition': `attachment; filename="sikaapp-statement-${from}-${to}.csv"`,
       },
     })
   }
@@ -90,7 +90,7 @@ export async function GET(request: Request) {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CediSmart Statement</title>
+<title>Sika App Statement</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #fff; font-size: 13px; }
@@ -157,7 +157,7 @@ export async function GET(request: Request) {
     <div class="brand">
       <div class="brand-icon">₵</div>
       <div>
-        <div class="brand-name">CediSmart</div>
+        <div class="brand-name">Sika App</div>
         <div class="brand-sub">Student Budget Tracker</div>
       </div>
     </div>
@@ -207,7 +207,7 @@ export async function GET(request: Request) {
   </table>
 
   <div class="footer">
-    <span>CediSmart — Confidential Financial Statement</span>
+    <span>Sika App — Confidential Financial Statement</span>
     <span>${profile?.name ?? ''} · ${periodLabel}</span>
   </div>
 

@@ -1,4 +1,4 @@
--- CediSmart — Schema Additions
+-- Sika App — Schema Additions
 -- Run this in Supabase SQL Editor after the main schema
 
 -- 6. Savings accounts

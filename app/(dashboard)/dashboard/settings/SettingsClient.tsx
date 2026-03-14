@@ -178,7 +178,7 @@ export default function SettingsClient({ profile }: { profile: any }) {
           <div>
             <h2 className="font-semibold text-primary-dark">App Tour</h2>
             <p className="text-sm text-gray-500 mt-0.5">
-              {tourRestarted ? 'Tour will start on the dashboard' : 'Replay the guided walkthrough of CediSmart'}
+              {tourRestarted ? 'Tour will start on the dashboard' : 'Replay the guided walkthrough of Sika App'}
             </p>
           </div>
         </div>
