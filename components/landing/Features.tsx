@@ -168,7 +168,7 @@ export default function Features() {
                 </div>
               </div>
               <Image
-                src="/screenshot.png"
+                src="/Screenshot.png"
                 alt="Sika App dashboard"
                 width={1400}
                 height={900}
