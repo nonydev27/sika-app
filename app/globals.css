@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand palette */
+  --color-primary-light: #BDE8F5;
+  --color-primary: #4988C4;
+  --color-primary-mid: #1C4D8D;
+  --color-primary-dark: #0F2854;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,3 +30,60 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+/* Shared form utility classes */
+.input-field {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  background: white;
+}
+.input-field:focus {
+  box-shadow: 0 0 0 2px #4988C4;
+  border-color: transparent;
+}
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+.btn-primary {
+  background: #4988C4;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background 0.15s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover { background: #1C4D8D; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background 0.15s;
+  cursor: pointer;
+  border: none;
+}
+.btn-secondary:hover { background: #e5e7eb; }
