@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     .filter((t) => t.type === 'expense')
     .reduce((s, t) => s + t.amount, 0)
 
-  const systemPrompt = `You are Cedi, a friendly personal finance assistant for Ghanaian university students. You are built into CediSmart, a budget tracking app.
+  const systemPrompt = `You are Sika, a friendly personal finance assistant for Ghanaian university students. You are built into Sika App, a budget tracking app.
 
 STUDENT PROFILE:
 - Name: ${profile?.name ?? 'Student'}

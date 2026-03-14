@@ -1,4 +1,4 @@
--- CediSmart — Supabase SQL Schema
+-- Sika App — Supabase SQL Schema
 -- Run this in the Supabase SQL Editor (Dashboard → SQL Editor → New query)
 
 -- 1. Profiles table

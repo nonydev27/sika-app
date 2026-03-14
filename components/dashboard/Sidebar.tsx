@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { LayoutDashboard, PieChart, ArrowLeftRight, TrendingUp, CalendarDays, LogOut } from 'lucide-react'
+import SikaAppLogo from '@/components/ui/SikaAppLogo'
 
 const NAV = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -29,13 +30,7 @@ export default function Sidebar({ profile }: { profile: { name?: string; univers
       <aside className="hidden md:flex fixed inset-y-0 left-0 w-64 flex-col bg-primary-dark text-white z-40">
         {/* Brand */}
         <div className="px-6 py-6 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center font-bold text-lg">₵</div>
-            <div>
-              <p className="font-bold text-sm">CediSmart</p>
-              <p className="text-xs text-primary-light">Budget tracker</p>
-            </div>
-          </div>
+          <SikaAppLogo size="md" />
         </div>
 
         {/* Nav */}

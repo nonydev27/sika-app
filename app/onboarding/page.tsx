@@ -91,7 +91,7 @@ export default function OnboardingPage() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 mb-4 font-bold text-white text-2xl">
             ₵
           </div>
-          <h1 className="text-2xl font-bold text-white">CediSmart Setup</h1>
+          <h1 className="text-2xl font-bold text-white">Sika App Setup</h1>
           <p className="text-primary-light text-sm mt-1">Step {step} of 5</p>
         </div>
 

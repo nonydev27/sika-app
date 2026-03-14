@@ -6,7 +6,7 @@ import { BarChart3, Receipt, LineChart, Bot, GraduationCap, Bell } from 'lucide-
 const FEATURES = [
   {
     Icon: BarChart3,
-    title: 'Smart Budget Planning',
+    title: 'Sika Budget Planning',
     desc: 'Allocate your allowance across Ghana-specific categories — trotro, waakye, data bundles, and more.',
     color: 'from-primary-dark to-primary-mid',
   },

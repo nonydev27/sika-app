@@ -75,7 +75,7 @@ export default function LandingPage() {
           <span className="font-bold text-white">Sika App</span>
         </div>
         <p className="text-primary-light text-sm">
-          Budget Smart, Study Hard. Made for Ghanaian students.
+          Track Your Money, Achieve Your Goals. Made for Ghanaian students.
         </p>
       </footer>
     </div>

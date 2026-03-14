@@ -97,9 +97,9 @@ export default function Hero() {
          
 
           <h1 className="text-7xl md:text-6xl font-bold text-white leading-tight mb-4">
-            Budget Smart,
+            Sika App,
             <br />
-            <span className="text-primary-light">Study Hard</span>
+            <span className="text-primary-light">Track Your Money</span>
           </h1>
 
           <p className="text-lg text-white/70 max-w-md mx-auto mb-10 leading-relaxed">
