@@ -24,7 +24,7 @@ const FEATURES = [
   },
   {
     Icon: Bot,
-    title: 'Cedi AI Assistant',
+    title: 'Sika App AI Assistant',
     desc: 'Your personal finance coach powered by Claude AI. Knows your budget, transactions, and gives Ghana-specific advice.',
     color: 'from-primary-dark to-primary',
   },
@@ -57,11 +57,11 @@ export default function Features() {
     <section id="features" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary-dark mb-4">
+          <h2 className="text-4xl font-bold text-primary-dark mb-4 capitalize">
             Everything a Ghanaian student needs
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto">
-            CediSmart is built specifically for the realities of student life in Ghana — from trotro fares to MoMo transfers.
+            Sika App is built specifically for the realities of student life in Ghana — from trotro fares to MoMo transfers.
           </p>
         </div>
 
