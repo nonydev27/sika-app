@@ -44,7 +44,7 @@ export default async function DashboardPage() {
       .limit(10),
     supabase
       .from('transactions')
-      .select('amount, type, category')
+      .select('amount, type, category, date')
       .eq('user_id', user.id),
     supabase
       .from('transactions')

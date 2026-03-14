@@ -228,7 +228,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
                         <p className="text-xs text-gray-400">of {formatCurrency(account.target_amount, currency)}</p>
                       )}
                     </div>
-                    <button onClick={() => startTransition(() => deleteSavingsAccount(account.id))}
+                    <button onClick={() => startTransition(async () => { await deleteSavingsAccount(account.id) })}
                       className="text-gray-300 hover:text-red-400 transition-colors p-1">
                       <Trash2 size={14} />
                     </button>
@@ -379,7 +379,7 @@ export default function SavingsClient({ accounts, currency, savingsGoal }: Props
                               {tx.type === 'deposit' ? '+' : '-'}{formatCurrency(tx.amount, currency)}
                             </p>
                             <button
-                              onClick={() => startTransition(() => deleteSavingsTransaction(tx.id, account.id, tx.amount, tx.type))}
+                              onClick={() => startTransition(async () => { await deleteSavingsTransaction(tx.id, account.id, tx.amount, tx.type) })}
                               className="text-gray-300 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all p-1">
                               <Trash2 size={12} />
                             </button>

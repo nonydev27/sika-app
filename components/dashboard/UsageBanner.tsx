@@ -19,7 +19,12 @@ interface UsageData {
   isPro: boolean
 }
 
-function UsageBar({ used, limit, label, icon: Icon }: { used: number; limit: number; label: string; icon: React.ElementType }) {
+function UsageBar({ used, limit, label, icon: Icon }: {
+  used: number
+  limit: number
+  label: string
+  icon: React.ComponentType<{ size?: number; className?: string }>
+}) {
   const pct = Math.min((used / limit) * 100, 100)
   const isLow = pct >= 80
   return (

@@ -20,7 +20,12 @@ interface Props {
 const FREE_LIMITS = { chat: 20, insights: 5, receipt: 10 }
 const sym = (c: string) => c === 'USD' ? '$' : '₵'
 
-function UsageMeter({ label, used, limit, icon: Icon }: { label: string; used: number; limit: number; icon: React.ElementType }) {
+function UsageMeter({ label, used, limit, icon: Icon }: {
+  label: string
+  used: number
+  limit: number
+  icon: React.ComponentType<{ size?: number; className?: string }>
+}) {
   const pct = Math.min((used / limit) * 100, 100)
   const danger = pct >= 90
   const warn = pct >= 70

@@ -420,7 +420,7 @@ export default function DailyClient({ todayTx, yesterdaySpent, dailyBudget, curr
                     {tx.type === 'income' ? '+' : '-'}{formatCurrency(Number(tx.amount), currency)}
                   </p>
                   <button
-                    onClick={() => startTransition(() => deleteDailyTransaction(tx.id))}
+                    onClick={() => startTransition(async () => { await deleteDailyTransaction(tx.id) })}
                     disabled={isPending}
                     className="p-1.5 rounded-lg text-gray-300 hover:text-red-400 hover:bg-red-50 transition-colors flex-shrink-0"
                     aria-label="Delete transaction"
