@@ -169,11 +169,12 @@ export default function Features() {
               </div>
               <Image
                 src="/screenshot.png"
-                alt="Sika App dashboard"
+                alt="CediSmart dashboard"
                 width={1400}
                 height={900}
                 className="w-full h-auto block"
                 priority
+                unoptimized
               />
               <div className="absolute inset-0 rounded-[20px] pointer-events-none"
                 style={{ boxShadow: 'inset 0 0 60px rgba(15,40,84,0.2)' }} />
@@ -217,11 +218,12 @@ export default function Features() {
               </div>
               <Image
                 src="/screenshot.png"
-                alt="Sika App dashboard"
+                alt="CediSmart dashboard"
                 width={1400}
                 height={900}
                 className="w-full h-auto block"
                 priority
+                unoptimized
               />
             </div>
           </motion.div>
