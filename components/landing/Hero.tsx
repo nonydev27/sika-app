@@ -96,7 +96,7 @@ export default function Hero() {
         <div className="text-center max-w-2xl">
          
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-4">
+          <h1 className="text-7xl md:text-6xl font-bold text-white leading-tight mb-4">
             Budget Smart,
             <br />
             <span className="text-primary-light">Study Hard</span>
@@ -123,12 +123,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">
-        <p className="text-white/40 text-xs">Scroll to explore</p>
-        <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
-        </div>
-      </div>
     </section>
   )
 }
