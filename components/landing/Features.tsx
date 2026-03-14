@@ -167,6 +167,8 @@ export default function Features() {
                   <span className="text-white/35 text-[11px] font-medium">app.sika-app.com/dashboard</span>
                 </div>
               </div>
+
+              //git cganhe
               <Image
                 src="/screenshot.png"
                 alt="CediSmart dashboard"
