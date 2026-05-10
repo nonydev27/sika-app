@@ -1,0 +1,138 @@
+[00:00:01.530] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.724] Server  LOG     ✓ Ready in 1371ms
+[00:01:08.648] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:01:08.686] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:08.902] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:01:09.112] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:02:17.661] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:02:18.173] Browser LOG     THREE.WebGLRenderer: Context Lost.
+[00:02:26.771] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:02:26.877] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:02:45.717] Browser LOG     THREE.WebGLRenderer: Context Lost.
+[00:04:30.084] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:04:30.171] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:06:45.264] Server  LOG     ✓ Compiled in 699ms
+[00:07:05.395] Server  LOG     ✓ Compiled in 311ms
+[00:07:25.861] Server  LOG     ✓ Compiled in 325ms
+[00:07:38.425] Server  LOG     ✓ Compiled in 866ms
+[00:08:05.651] Server  LOG     ✓ Compiled in 63ms
+[00:08:14.153] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./components/dashboard/AppTour.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:08:14.171] Server  LOG     ✓ Compiled in 78ms
+[00:08:16.403] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:08:16.488] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:17.458] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:08:18.460] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:08:30.326] Server  LOG     ✓ Compiled in 54ms
+[00:14:34.109] Server  LOG     ✓ Compiled in 106ms
+[00:15:07.356] Server  LOG     ✓ Compiled in 32ms
+[00:16:13.467] Server  LOG     ✓ Compiled in 33ms
+[00:16:41.930] Server  LOG     ✓ Compiled in 80ms
+[00:16:59.278] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:16:59.788] Browser LOG     THREE.WebGLRenderer: Context Lost.
+[00:21:08.697] Server  LOG     ✓ Compiled in 73ms
+[00:21:34.693] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:45.320] Server  LOG     ✓ Compiled in 44ms
+[00:21:53.681] Server  LOG     ✓ Compiled in 48ms
+[00:22:27.961] Server  LOG     ✓ Compiled in 41ms
+[00:22:34.933] Server  LOG     ✓ Compiled in 44ms
+[00:22:39.722] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:24:32.347] Server  LOG     ✓ Compiled in 204ms
+[00:24:32.437] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-linecap strokeLinecap
+[00:24:32.437] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-linejoin strokeLinejoin
+[00:24:32.437] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-width strokeWidth
+[00:24:32.437] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? class className
+[00:24:41.331] Server  LOG     ✓ Compiled in 44ms
+[00:24:53.091] Server  LOG     ✓ Compiled in 83ms
+[00:24:57.561] Server  LOG     ✓ Compiled in 81ms
+[00:25:51.742] Server  LOG     ✓ Compiled in 26ms
+[00:26:00.319] Server  LOG     ✓ Compiled in 45ms
+[00:26:10.644] Server  LOG     ✓ Compiled in 142ms
+[00:26:15.201] Server  LOG     ✓ Compiled in 28ms
+[00:26:23.881] Server  LOG     ✓ Compiled in 71ms
+[00:26:28.547] Server  LOG     ✓ Compiled in 54ms
+[00:26:33.033] Server  ERROR   Invalid DOM property `stroke-width`. Did you mean `strokeWidth`?
+[00:26:33.033] Server  ERROR   Invalid DOM property `stroke-linecap`. Did you mean `strokeLinecap`?
+[00:26:33.034] Server  ERROR   Invalid DOM property `stroke-linejoin`. Did you mean `strokeLinejoin`?
+[00:26:33.345] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:26:33.466] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-linecap strokeLinecap
+[00:26:33.466] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-linejoin strokeLinejoin
+[00:26:33.466] Browser ERROR   Invalid DOM property `%s`. Did you mean `%s`? stroke-width strokeWidth
+[00:27:29.570] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:27:29.694] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:29.879] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:27:30.124] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:27:55.495] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:28:29.932] Server  LOG     ✓ Compiled in 120ms
+[00:28:55.258] Server  ERROR   Error: fetch failed
+    at context.fetch (/home/nonydev/Documents/sika-app/node_modules/next/dist/server/web/sandbox/context.js:321:60)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:577:23
+    at _handleRequest (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:931:24)
+    at _request (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:918:24)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4603:225
+    at SupabaseAuthClient._useSession (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4472:26)
+    at async SupabaseAuthClient._getUser (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4588:20)
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4572:20
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4420:28 {
+  
+}
+[00:28:55.841] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:55.842] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[00:28:56.054] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:28:56.266] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[00:28:57.721] Server  ERROR   Error: fetch failed
+    at context.fetch (/home/nonydev/Documents/sika-app/node_modules/next/dist/server/web/sandbox/context.js:321:60)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:577:23
+    at _handleRequest (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:931:24)
+    at _request (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:918:24)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4603:225
+    at SupabaseAuthClient._useSession (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4472:26)
+    at async SupabaseAuthClient._getUser (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4588:20)
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4572:20
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4420:28 {
+  
+}
+[00:28:58.138] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:28:58.641] Browser LOG     THREE.WebGLRenderer: Context Lost.
+[00:29:00.530] Server  ERROR   Error: fetch failed
+    at context.fetch (/home/nonydev/Documents/sika-app/node_modules/next/dist/server/web/sandbox/context.js:321:60)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:577:23
+    at _handleRequest (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:931:24)
+    at _request (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:918:24)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4603:225
+    at SupabaseAuthClient._useSession (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4472:26)
+    at async SupabaseAuthClient._getUser (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4588:20)
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4572:20
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4420:28 {
+  
+}
+[00:29:03.074] Server  ERROR   Error: fetch failed
+    at context.fetch (/home/nonydev/Documents/sika-app/node_modules/next/dist/server/web/sandbox/context.js:321:60)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:577:23
+    at _handleRequest (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:931:24)
+    at _request (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:918:24)
+    at /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4603:225
+    at SupabaseAuthClient._useSession (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4472:26)
+    at async SupabaseAuthClient._getUser (/home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4588:20)
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4572:20
+    at async /home/nonydev/Documents/sika-app/.next/dev/server/edge/chunks/node_modules_@supabase_auth-js_dist_module_33c852e9._.js:4420:28 {
+  
+}
+[00:30:11.172] Server  LOG     ✓ Compiled in 100ms
+[01:09:24.707] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:09:24.707] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:09:24.716] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[01:09:25.391] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[01:12:53.049] Server  LOG     ✓ Compiled in 218ms
+[01:13:16.618] Server  LOG     ✓ Compiled in 332ms
+[01:13:17.261] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[01:13:22.904] Server  LOG     ✓ Compiled in 132ms
+[01:14:21.188] Server  LOG     ✓ Compiled in 245ms
+[01:14:21.932] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[01:14:39.114] Server  LOG     ✓ Compiled in 168ms
+[01:20:25.319] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:20:25.357] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[01:20:25.717] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:20:26.179] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[01:27:45.941] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/screenshot.png" "received" null
+[01:27:46.226] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[01:29:10.471] Browser LOG     THREE.WebGLRenderer: Context Lost.

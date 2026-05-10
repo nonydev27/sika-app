@@ -1,0 +1,20 @@
+{
+  "node": {
+    "4062431c25beebadc2ae679b37c4ba70390baa4517": {
+      "workers": {
+        "app/(dashboard)/dashboard/settings/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/dashboard/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/(dashboard)/dashboard/settings/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateProfile",
+          "filename": "app/(dashboard)/dashboard/settings/actions.ts"
+        }
+      },
+      "layer": {
+        "app/(dashboard)/dashboard/settings/page": "action-browser"
+      },
+      "exportedName": "updateProfile",
+      "filename": "app/(dashboard)/dashboard/settings/actions.ts"
+    }
+  },
+  "edge": {}
+}
